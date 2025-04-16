@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de Bord BNIG</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <!-- Wrapper -->
+    <div class="flex flex-col lg:flex-row min-h-screen">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="lg:w-64 bg-green-800 text-white p-4">
+            <div class="text-2xl font-bold mb-4">BNIG</div>
+            <!-- Barre de recherche et profil sur la barre de menu -->
+            <div class="lg:hidden flex flex-col gap-2 mb-4">
+                <input type="text" placeholder="Rechercher..." class="p-2 rounded-md border">
+                <div class="flex items-center justify-between">
+                    <span class="text-gray-300">🔔</span>
+                    <span class="text-gray-300">👤 Marie Dupont</span>
+                </div>
+            </div>
+            <nav class="space-y-2">
+                <a href="#" class="flex items-center p-2 rounded-md bg-green-700">📊 Tableau de bord</a>
+                <a href="#" class="flex items-center p-2 rounded-md hover:bg-green-600">📑 Rapports</a>
+                <a href="{% url 'upload_excel' %}" class="flex items-center p-2 rounded-md hover:bg-green-600">📂 Importer La balance</a>
+                <a href="#" class="flex items-center p-2 rounded-md hover:bg-green-600">📈 Analyses</a>
+                <a href="#" class="flex items-center p-2 rounded-md hover:bg-green-600">💸 Transactions</a>
+                <a href="#" class="flex items-center p-2 rounded-md hover:bg-green-600">📅 Échéances</a>
+                <a href="#" class="flex items-center p-2 rounded-md hover:bg-green-600">👥 Utilisateurs</a>
+                <a href="#" class="flex items-center p-2 rounded-md hover:bg-green-600">⚙️ Paramètres</a>
+                <a href="{% url 'logout' %}" class="flex items-center bg-red-500 p-2 rounded-md hover:bg-red-800"> Deconnexion</a>
+                <!-- <a href="" class="px-4 py-2 bg-red-500 text-white rounded-md  focus:outline-none focus:ring-2 focus:ring-blue-300">Deconnexion</a> -->
+
+            </nav>
+        </aside>
+
+        <!-- Mobile Sidebar Toggle -->
+        <div class="lg:hidden bg-green-800 text-white p-4">
+            <button id="toggleSidebar" class="text-2xl">☰</button>
+        </div>
+
+        <!-- Main content -->
+        <main class="flex-1 p-4 lg:p-6">
+            <header class="hidden lg:flex justify-between items-center mb-6">
+                <h1 class="text-2xl lg:text-3xl font-bold">Tableau de bord</h1>
+                <div class="flex items-center gap-2 lg:gap-4">
+                    <input type="text" placeholder="Rechercher..." class="p-2 rounded-md border w-full lg:w-64">
+                    <span class="text-gray-500">🔔</span>
+                    <span class="text-gray-500">👤{{user}}</span>
+                </div>
+            </header>
+            {% comment %} <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-6">
+                <div class="p-4 bg-white shadow rounded-lg">
+                    <h2 class="text-lg font-semibold">Rapports en attente</h2>
+                    <p class="text-3xl font-bold">7</p>
+                    <p class="text-green-500">+12%</p>
+                </div>
+                <div class="p-4 bg-white shadow rounded-lg">
+                    <h2 class="text-lg font-semibold">Utilisateurs actifs</h2>
+                    <p class="text-3xl font-bold">32</p>
+                    <p class="text-green-500">+8%</p>
+                </div>
+                <div class="p-4 bg-white shadow rounded-lg">
+                    <h2 class="text-lg font-semibold">Transactions analysées</h2>
+                    <p class="text-3xl font-bold">8 439</p>
+                    <p class="text-red-500">-3%</p>
+                </div>
+                <div class="p-4 bg-white shadow rounded-lg">
+                    <h2 class="text-lg font-semibold">Performance globale</h2>
+                    <p class="text-3xl font-bold">92%</p>
+                    <p class="text-green-500">+5%</p>
+                </div>
+            </section> {% endcomment %}
+            <section class="p-4 bg-white shadow rounded-lg">
+                {% comment %} <h2 class="text-lg font-semibold">Performance financière</h2> {% endcomment %}
+
+                <div class="h-40 bg-gray-200 rounded-md mt-4"></div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Sidebar Toggle Script -->
+    <script>
+        const toggleSidebar = document.getElementById('toggleSidebar');
+        const sidebar = document.getElementById('sidebar');
+        toggleSidebar.addEventListener('click', () => {
+            sidebar.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

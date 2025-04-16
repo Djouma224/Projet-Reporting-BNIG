@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapport BNIG</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="flex h-screen">
+        <aside class="w-64 bg-white shadow-md p-4">
+            <div class="text-xl font-semibold mb-6">BNIG</div>
+            <nav>
+                <a href="#" class="block py-2 px-4 hover:bg-gray-200">Tableau de bord</a>
+                <a href="#" class="block py-2 px-4 hover:bg-gray-200">Rapports</a>
+                <a href="#" class="block py-2 px-4 hover:bg-gray-200">Relevés</a>
+                <a href="#" class="block py-2 px-4 hover:bg-gray-200">Analyses</a>
+                <a href="#" class="block py-2 px-4 hover:bg-gray-200">Transactions</a>
+                <a href="#" class="block py-2 px-4 hover:bg-gray-200">Échéances</a>
+                <a href="#" class="block py-2 px-4 hover:bg-gray-200">Utilisateurs</a>
+                <a href="#" class="block py-2 px-4 hover:bg-gray-200">Paramètres</a>
+            </nav>
+            <div class="mt-auto text-sm text-gray-500">Rapport BNIG v1.02</div>
+        </aside>
+
+        <main class="flex-1 p-8">
+            <div class="flex justify-between items-center mb-6">
+                <h1 class="text-2xl font-semibold">Tableau de bord</h1>
+                <div class="flex items-center">
+                    <input type="text" placeholder="Rechercher..." class="border rounded px-3 py-2 mr-4">
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 rounded-full bg-gray-400 mr-2"></div>
+                        <div>
+                            <p class="text-sm font-semibold">Marie Dupont</p>
+                            <p class="text-xs text-gray-500">Administrateur</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p class="mb-6">Bienvenue sur votre plateforme de reporting BNIG. Consultez vos indicateurs clés et gérez vos rapports.</p>
+
+            <div class="flex space-x-4 mb-6">
+                <button class="px-4 py-2 bg-blue-500 text-white rounded">Vue d'ensemble</button>
+                <button class="px-4 py-2 bg-gray-200 rounded">Rapports financiers</button>
+                <button class="px-4 py-2 bg-gray-200 rounded">Indicateurs ESG</button>
+                <button class="px-4 py-2 bg-gray-200 rounded">Audit et Conformité</button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-white rounded shadow p-4">
+                    <h2 class="text-lg font-semibold mb-2">Rapports en attente</h2>
+                    <div class="text-4xl font-bold">7</div>
+                    <p class="text-sm mt-2">5 rapports de plus que la semaine précédente</p>
+                </div>
+                <div class="bg-white rounded shadow p-4">
+                    <h2 class="text-lg font-semibold mb-2">Utilisateurs actifs</h2>
+                    <div class="text-4xl font-bold">32</div>
+                    <p class="text-sm mt-2">Accès au système de reporting</p>
+                </div>
+                <div class="bg-white rounded shadow p-4">
+                    <h2 class="text-lg font-semibold mb-2">Transactions analysées</h2>
+                    <div class="text-4xl font-bold">8 439</div>
+                    <p class="text-sm mt-2">Durant le mois en cours</p>
+                </div>
+                <div class="bg-white rounded shadow p-4">
+                    <h2 class="text-lg font-semibold mb-2">Performance globale</h2>
+                    <div class="text-4xl font-bold">92%</div>
+                    <p class="text-sm mt-2">Rapports Indice de conformité</p>
+                </div>
+            </div>
+
+            <div class="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-4">
+                <div class="bg-white rounded shadow p-4">
+                    <h2 class="text-lg font-semibold mb-4">Performance financière</h2>
+                    <div class="flex justify-center">
+                        <canvas id="financialChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white rounded shadow p-4">
+                    <h2 class="text-lg font-semibold mb-4">Prochaines échéances</h2>
+                    <a href="#" class="block bg-gray-100 p-2 rounded mb-2">
+                        <div class="flex justify-between">
+                            <div>
+                                <p class="font-semibold">Rapport mensuel d'avril</p>
+                                <p class="text-sm text-gray-500">Échéance : 15 avril</p>
+                            </div>
+                            <span class="bg-red-500 text-white px-2 py-1 rounded">Haute</span>
+                        </div>
+                    </a>
+                    <a href="#" class="block bg-gray-100 p-2 rounded mb-2">
+                        <div class="flex justify-between">
+                            <div>
+                                <p class="font-semibold">Revue trimestrielle</p>
+                                <p class="text-sm text-gray-500">Échéance : 22 avril</p>
+                            </div>
+                            <span class="bg-yellow-500 text-white px-2 py-1 rounded">Moyenne</span>
+                        </div>
+                    </a>
+                    <a href="#" class="block bg-gray-100 p-2 rounded mb-2">
+                        <div class="flex justify-between">
+                            <div>
+                                <p class="font-semibold">Soumission rapport ESG</p>
+                                <p class="text-sm text-gray-500">Échéance : 30 avril</p>
+                            </div>
+                            <span class="bg-red-500 text-white px-2 py-1 rounded">Haute</span>
+                        </div>
+                    </a>
+                    <a href="#" class="block text-blue-500 mt-4">Voir le calendrier</a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <scrip type="text/javascript">
+
+        // Exemple de données pour le graphique
+const financialData = {
+    labels: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin'],
+    datasets: [{
+        label: 'Performance financière',
+        data: [20, 28.3, 32, 29.5, 38, 35],
+        fill: false,
+        borderColor: 'rgb(75, 192, 192)',
+        tension: 0.1
+    }]
+};
+
+// Configuration du graphique
+const financialConfig = {
+    type: 'line',
+    data: financialData,
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+};
+
+// Création du graphique
+const financialChart = new Chart(
+    document.getElementById('financialChart'),
+    financialConfig
+);
+    </scrip>
+</body>
+</html>
