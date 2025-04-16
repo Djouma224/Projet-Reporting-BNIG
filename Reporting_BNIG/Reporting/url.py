@@ -7,5 +7,7 @@ urlpatterns = [
     path('logout/',logout_view, name='logout'),
     path('upload/', upload_excel, name='upload_excel'),
     path('upload/success/',upload_success, name='upload_success'),
-    path('auth/password/modify/',modifyPassword, name='modifyPassword'),
+    # path('auth/password/modify/',modifyPassword, name='modifyPassword'),
+    path('auth/password/resetUser/',userResetToken,name="resetUser"),
+    path('auth/password/resetpwd/',resetPwd, name='resetPwd'),
 ]
