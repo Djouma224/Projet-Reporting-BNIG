@@ -1,229 +1,225 @@
-{% comment %} <!DOCTYPE html>
-<html>
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
 <head>
-    <title>Importer un fichier Excel</title>
+  <meta charset="UTF-8">
+  <title>Système de Gestion des Balances</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'Reporting\css\style.css'%}"> 
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .main-title {
+      color: #2e7d32;
+      font-size: 32px;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .custom-card {
+      max-width: 700px;
+      margin: 30px auto;
+      border-radius: 16px;
+      background-color: white;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .custom-card-header {
+      background-color: #198754;
+      text-align: center;
+      padding: 20px 10px;
+    }
+
+    .custom-card-header h2 {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 0;
+      color: #2e7d32;
+    }
+
+    .form-title {
+      font-size: 18px;
+      font-weight: 600;
+      text-align: center;
+      margin: 20px 0 10px;
+    }
+
+    .form-section {
+      padding: 20px 30px;
+    }
+
+    .upload-area {
+      border: 2px dashed #81c784;
+      border-radius: 12px;
+      background-color: #f1fff3;
+      text-align: center;
+      padding: 30px 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .upload-area:hover {
+      background-color: #e8f5e9;
+    }
+
+    .upload-icon {
+      font-size: 40px;
+      color: #4caf50;
+      margin-bottom: 10px;
+    }
+
+    .submit-btn {
+      background-color: #2e7d32;
+      color: white;
+      font-weight: 500;
+      border-radius: 8px;
+      padding: 12px 0;
+      width: 100%;
+      font-size: 16px;
+      border: none;
+    }
+
+    .submit-btn:hover {
+      background-color: #256d27;
+    }
+  </style>
 </head>
 <body>
-    <h1>Importer un fichier Excel</h1>
+
+  
+
+  <div class="custom-card">
+    <div class="custom-card-header" id="bbouton">
+      <h2 style="color:white;">Système de Gestion des Balances</h2>
+    </div>
     {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-            {% endfor %}
-        </ul>
+      <div class="alert alert-dismissible fade show p-0 m-3 mb-0" role="alert">
+        {% for message in messages %}
+            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %} mb-0">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+        
+      </div>
     {% endif %}
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Importer et Envoyer</button>
-    </form>
-
-    
-    
-
-</body>
-</html> {% endcomment %}
-
-<!DOCTYPE html>
-    <html lang="fr">
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Import de Fichiers Excel</title>
-      <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> -->
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-      <style>
-        body {
-          background: #f8f9fa;
-          min-height: 100vh;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          font-family: 'Poppins', sans-serif;
-        }
-        .upload-container {
-          background: #fff;
-          padding: 3rem;
-          border-radius: 20px;
-          box-shadow: 0 8px 30px rgba(0,0,0,0.1);
-          text-align: center;
-          width: 100%;
-          max-width: 500px;
-          border: solid 1px #146c4348;
-        }
-        .upload-icon {
-          font-size: 4rem;
-          color: #198754;
-          margin-bottom: 1rem;
-        }
-        .upload-title {
-          font-size: 1.8rem;
-          font-weight: 700;
-          color: #198754;
-          margin-bottom: 0.5rem;
-        }
-        .upload-instructions {
-          font-size: 1rem;
-          color: #6c757d;
-          margin-bottom: 2rem;
-        }
-        .custom-file-upload {
-          border: 2px dashed #198754;
-          border-radius: 15px;
-          padding: 2rem;
-          cursor: pointer;
-          color: #198754;
-          font-weight: 600;
-          transition: background 0.3s, border-color 0.3s;
-        }
-        .custom-file-upload.dragover {
-          background: #d1e7dd;
-          border-color: #146c43;
-        }
-        #formFile {
-          display: none;
-        }
-        #file-name {
-          margin-top: 1rem;
-          font-size: 0.95rem;
-          color: #555;
-        }
-        .btn-upload {
-          margin-top: 2rem;
-          background: #198754;
-          color: white;
-          padding: 0.75rem 2rem;
-          border-radius: 50px;
-          font-weight: 600;
-          border: none;
-          transition: background 0.3s;
-        }
-        .btn-upload:hover {
-          background: #146c43;
-          color: white;
-        }
-        #message p {
-          margin-top: 1rem;
-          font-size: 1rem;
-          font-weight: 600;
-        }
-        .spinner-border {
-          width: 2rem;
-          height: 2rem;
-          margin-top: 1rem;
-        }
-        .spirale{
-            display: block;
-        }
-      </style>
-    </head>
-    <body>
-    
-    <div class="upload-container m-4">
-        <!-- <div class="spinner-border text-success" role="status"><span class="visually-hidden">Chargement...</span></div> -->
-                {% if messages %}
-                    <div class="alert alert-dismissible fade show p-0 m-0" role="alert">
-                        {% for message in messages %}
-                            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
-                                {{ message }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                        {% endfor %}
-                        
-                    </div>
-                {% endif %}
-      <div class="upload-icon">📂</div>
-      <div class="upload-title">Importation de Fichier Excel</div>
-      <div class="upload-instructions">Sélectionnez ou déposez votre fichier Excel (.xlsx, .xls)</div>
-    
+    <div class="form-section">
+      <h1 class="form-title mb-3 mt-0" style="font-size: 3em; color: var(--bg-bnig);">BNIG</h1>
       <form id="uploadForm" method="post" action="" enctype="multipart/form-data">
         {% csrf_token %}
-        <label for="formFile" class="custom-file-upload" id="drop-area">
-          📁 Cliquez ou déposez un fichier ici
-        </label>
-        <input type="file" id="formFile" accept=".xls, .xlsx" required name="excel_file">
+        <div class="row mb-4">
+          <div class="col-md-6">
+            <label class="form-label">Date d'arrêté</label>
+            <input type="date" class="form-control" name="date">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Statut</label>
+            <select class="form-select" name="statut">
+              <option  disabled>Sélectionner un statut</option>
+              <option value="CREATION" selected>CREATION</option>
+              <option value="MODIFICATION">MODIFICATION</option>
+              <option value="ERREUR">ERREUR</option>
+              <option value="ANNULER">ANNULER</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label d-block text-center mb-2 custom-file-upload" id="drop-area">Fichier Excel</label>
+          <div class="upload-area" onclick="document.getElementById('excelFile').click();">
+            <div class="upload-icon"><img src="{% static 'Reporting/images/logo_excel.png' %}" alt="" style="max-width: 50px; max-height: 50px;">
+            </div>
+            <div>Cliquez pour télécharger un fichier Excel</div>
+          </div>
+          <input type="file" id="excelFile" accept=".xls, .xlsx"  name="excel_file" style="display: none;">
+        </div>
         <div id="file-name"></div>
-        <button type="submit" class="btn btn-upload">Envoyer</button>
+        <button type="submit" class="submit-btn btn-upload" id="bbouton" >
+          <span><i class="fa-regular fa-paper-plane"></i></span> Envoyer
+        </button>
       </form>
-      <div id="message" class="mt-3"></div>
-      <div class="mt-3 text-muted">BNIG - Innovons ensemble pour un avenir meilleur.</div>
-        
-        
+      
     </div>
-    
-    <script>
-      const uploadForm = document.getElementById('uploadForm');
-      const fileInput = document.getElementById('formFile');
-      const fileNameDiv = document.getElementById('file-name');
-      const messageDiv = document.getElementById('message');
-      const dropArea = document.getElementById('drop-area');
-    
-      fileInput.addEventListener('change', function() {
-        if (fileInput.files.length > 0) {
-          fileNameDiv.textContent = 'Fichier sélectionné : ' + fileInput.files[0].name;
-        } else {
-          fileNameDiv.textContent = '';
-        }
-      });
-    
-    // //   ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-    // //     dropArea.addEventListener(eventName, preventDefaults, false);
-    // //   });
-    
-    // //   function preventDefaults(e) {
-    // //     e.preventDefault();
-    // //     e.stopPropagation();
-    // //   }
-    
-    // //   ['dragenter', 'dragover'].forEach(eventName => {
-    // //     dropArea.addEventListener(eventName, () => dropArea.classList.add('dragover'), false);
-    // //   });
-    
-    // //   ['dragleave', 'drop'].forEach(eventName => {
-    // //     dropArea.addEventListener(eventName, () => dropArea.classList.remove('dragover'), false);
-    // //   });
-    
-    // //   dropArea.addEventListener('drop', handleDrop, false);
-    
-      function handleDrop(e) {
-        const dt = e.dataTransfer;
-        const files = dt.files;
-        fileInput.files = files;
-    
-        if (fileInput.files.length > 0) {
-          fileNameDiv.textContent = 'Fichier déposé : ' + fileInput.files[0].name;
-        }
+  </div>
+
+  <script>
+    const uploadForm = document.getElementById('uploadForm');
+    const fileInput = document.getElementById('formFile');
+    const fileNameDiv = document.getElementById('file-name');
+    const messageDiv = document.getElementById('message');
+    const dropArea = document.getElementById('drop-area');
+  
+    fileInput.addEventListener('change', function() {
+      if (fileInput.files.length > 0) {
+        fileNameDiv.textContent = 'Fichier sélectionné : ' + fileInput.files[0].name;
+      } else {
+        fileNameDiv.textContent = '';
       }
-    
-      uploadForm.addEventListener('submit', function(event) {
-        // event.preventDefault();
-    
-        if (fileInput.files.length < 0) {
-          messageDiv.innerHTML = '<p class="text-danger">❌ Aucun fichier sélectionné. Veuillez choisir un fichier.</p>';
-          return;
-        }
-    
-        messageDiv.innerHTML = '<div class="spinner-border text-success" role="status"><span class="visually-hidden">Chargement...</span></div>';
-    
-        setTimeout(() => {
-          messageDiv.innerHTML = '<p class="text-success">✅ Fichier "' + fileInput.files[0].name + '" envoyé avec succès !</p>';
-        }, 2000);
+    });
+  
+  // //   ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+  // //     dropArea.addEventListener(eventName, preventDefaults, false);
+  // //   });
+  
+  // //   function preventDefaults(e) {
+  // //     e.preventDefault();
+  // //     e.stopPropagation();
+  // //   }
+  
+  // //   ['dragenter', 'dragover'].forEach(eventName => {
+  // //     dropArea.addEventListener(eventName, () => dropArea.classList.add('dragover'), false);
+  // //   });
+  
+  // //   ['dragleave', 'drop'].forEach(eventName => {
+  // //     dropArea.addEventListener(eventName, () => dropArea.classList.remove('dragover'), false);
+  // //   });
+  
+  // //   dropArea.addEventListener('drop', handleDrop, false);
+  
+    function handleDrop(e) {
+      const dt = e.dataTransfer;
+      const files = dt.files;
+      fileInput.files = files;
+  
+      if (fileInput.files.length > 0) {
+        fileNameDiv.textContent = 'Fichier déposé : ' + fileInput.files[0].name;
+      }
+    }
+  
+    uploadForm.addEventListener('submit', function(event) {
+      // event.preventDefault();
+  
+      if (fileInput.files.length < 0) {
+        messageDiv.innerHTML = '<p class="text-danger">❌ Aucun fichier sélectionné. Veuillez choisir un fichier.</p>';
+        return;
+      }
+  
+      messageDiv.innerHTML = '<div class="spinner-border text-success" role="status"><span class="visually-hidden">Chargement...</span></div>';
+  
+      setTimeout(() => {
+        messageDiv.innerHTML = '<p class="text-success">✅ Fichier "' + fileInput.files[0].name + '" envoyé avec succès !</p>';
+      }, 2000);
+    });
+
+
+
+
+
+
+
+    window.addEventListener('load', function() {
+      pire = document.getElementById('spiral');
+      pire.classList.remove('spirale');
+        
       });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-
-
-
-
-
-
-      window.addEventListener('load', function() {
-        pire = document.getElementById('spiral');
-        pire.classList.remove('spirale');
-          
-        });
-    </script>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
-    </html>
+</body>
+</html>
